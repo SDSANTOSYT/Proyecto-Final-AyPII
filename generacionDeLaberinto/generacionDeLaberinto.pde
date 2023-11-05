@@ -133,17 +133,3 @@ void imprimirMatriz(int vector[][], int n, int m, int i, int j) {
     }
   }
 }
-
-void setup() {
-  System.out.println((int) (Math.random() * 4 + 1));
-  int n;
-  n = 20;
-  int filas = n*2 + 1;
-  int columnas = n*2 + 1;
-  generarLaberinto(filas, columnas, 1, 1);
-  imprimirMatriz(M, filas, columnas, 0, 0);
-
-  System.out.println("posiciones de inicio");
-  System.out.println("posiciones finales");
- 
-}
