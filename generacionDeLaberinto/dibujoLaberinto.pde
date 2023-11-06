@@ -1,4 +1,4 @@
-public int n = 10;
+public int n = 30;
 public int filas = n*2+1;
 public int columnas = n*2+1;
 public int unidad = 900/filas;
@@ -17,10 +17,18 @@ void dibujarlab() {
 
       if (M[i][j] == 2) {
         fill(255, 162, 51);
-        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
+        square(j*unidad + unidad/2 , i*unidad, unidad);
       } else if (M[i][j] == 0) {
         fill(0);
-        square(j*unidad + unidad/4, i*unidad +unidad/4, unidad);
+        if ((j == 0 || i == 0 || j == columnas -1 || i == filas -1)) {
+          fill(0);
+          square(j*unidad + unidad/2 , i*unidad, unidad);
+        } else if (i%2 == 0) {
+          rect(j*unidad + unidad/2, i*unidad + unidad/2, unidad, unidad/2);
+        } else {
+          rect(j*unidad + unidad/2, i*unidad, unidad/2, unidad + unidad/2);
+        }
+        //square(j*unidad + unidad/4, i*unidad +unidad/4, unidad);
       } else if (M[i][j] == 1) {
         noStroke();
         fill(255);
@@ -38,7 +46,7 @@ void mouseClicked() {
       if (cont < 2) {
         viaje[cont][0] = mouseEnY;
         viaje[cont][1] = mouseEnX;
-        M[mouseEnY][mouseEnX] = 2;
+        M[mouseEnY][mouseEnX] = 1;
         cont++;
       }
     }
