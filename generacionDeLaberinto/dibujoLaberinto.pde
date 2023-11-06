@@ -17,12 +17,12 @@ void dibujarlab() { // subrutina para dibujar el laberinto
 
       if (M[i][j] == 2) {
         fill(255, 162, 51);
-        square(j*unidad + unidad/2 , i*unidad, unidad);
+        square(j*unidad + unidad/2, i*unidad, unidad);
       } else if (M[i][j] == 0) { // dibuja las paredes
         fill(0);
         if ((j == 0 || i == 0 || j == columnas -1 || i == filas -1)) { // si está en el borde solo dibuja un cuadrado
           fill(0);
-          square(j*unidad + unidad/2 , i*unidad, unidad);
+          square(j*unidad + unidad/2, i*unidad, unidad);
         } else if (i%2 == 0) { // dibuja una pared horizontal
           rect(j*unidad + unidad/2, i*unidad + unidad/2, unidad, unidad/2);
         } else { // dibuja una pared vertical
