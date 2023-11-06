@@ -6,18 +6,19 @@ public int unidad = 900/filas;
 int mouseEnX;
 int mouseEnY;
 int viaje[][] = new int[2][2];
-int cont = 0;
+int cont;
 
 void dibujarlab() {
+  fill(215);
+  square(0, 0, unidad*filas + unidad);
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       //noStroke();
-      seleccionEntradaSalida();
-      if ((i == viaje[0][0] & j == viaje[0][1]) | (i == viaje[1][0] &  j == viaje[1][1])) {
+
+      if (M[i][j] == 2) {
         fill(255, 162, 51);
         square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
-      }
-      if (M[i][j] == 0) {
+      } else if (M[i][j] == 0) {
         fill(0);
         square(j*unidad + unidad/4, i*unidad +unidad/4, unidad);
       } else if (M[i][j] == 1) {
@@ -28,32 +29,41 @@ void dibujarlab() {
       }
     }
   }
+  seleccionEntradaSalida();
+}
+
+void mouseClicked() {
+  if ((mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1)) {
+    if ((mouseEnX %2 != 0 && mouseEnY %2 == 0) || (mouseEnX %2 == 0 && mouseEnY %2 != 0)) {
+      if (cont < 2) {
+        viaje[cont][0] = mouseEnY;
+        viaje[cont][1] = mouseEnX;
+        M[mouseEnY][mouseEnX] = 2;
+        cont++;
+      }
+    }
+  }
 }
 
 void seleccionEntradaSalida() {
   mouseEnX = mouseX/unidad;
   mouseEnY = mouseY/unidad;
-  if (mouseEnX == 0 | mouseEnY == 0 | mouseEnX == columnas -1 | mouseEnY == filas -1) {
-    if (mousePressed) {
-      if (cont < 2) {
-        viaje[cont][0] = mouseEnY;
-        viaje[cont][1] = mouseEnX;
-        cont++;
-      }
-    } else {
-      noStroke();
-      fill(51, 249, 255);
-      square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
-    }
+  if (mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1) {
+    noStroke();
+    fill(51, 249, 255);
+    square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
   }
 }
 
 
 void setup() {
+  frameRate(100);
   size(900, 900);
   background(255);
   generarLaberinto(filas, columnas, 1, 1);
+  printMatrix();
   imprimirMatriz(M, filas, columnas, 0, 0);
+  cont = 0;
 
   System.out.println("posiciones de inicio");
   System.out.println("posiciones finales");
