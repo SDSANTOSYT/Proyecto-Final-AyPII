@@ -1,4 +1,4 @@
-public int n = 10;
+public int n = 4;
 public int filas = n*2+1;
 public int columnas = n*2+1;
 public int unidad = 900/filas;
@@ -9,8 +9,7 @@ int viaje[][] = new int[2][2];
 int cont;
 
 void dibujarlab() { // subrutina para dibujar el laberinto
-  fill(215);
-  square(0, 0, unidad*filas + unidad);
+  background(215);
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       //noStroke();
@@ -54,13 +53,14 @@ void mouseClicked() { // subrutina para seleccionar la entrada y la salida
 void seleccionEntradaSalida() {
   mouseEnX = mouseX/unidad;
   mouseEnY = mouseY/unidad;
-  if (cont != 2){
-  if (mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1) {
-    noStroke();
-    fill(51, 249, 255);
-    square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
+  if (cont != 2) {
+    if ((mouseEnX == 0 && mouseEnY < filas) || (mouseEnY == 0 && mouseEnX < columnas) || (mouseEnX == columnas -1 && mouseEnY < filas) || (mouseEnY == filas -1 && mouseEnX < columnas)) {
+      noStroke();
+      fill(51, 249, 255, 200);
+      square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
+    }
   }
-}}
+}
 
 
 void setup() {
