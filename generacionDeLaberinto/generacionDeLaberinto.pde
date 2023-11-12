@@ -6,22 +6,44 @@ static int inicio[][] = new int[10000][2]; // inicio de los caminos
 static int fin[][] = new int[10000][2]; // fin de los caminos
 static int k = 0, l = 0, i, j, direccion;
 
-boolean fueVisitada(int casilla) { // función que me dice si una casilla ya ha sido visitada
+/**
+ * función que me dice si una casilla ya ha sido visitada
+ * @param casilla
+ * return verdadero si la casilla tiene un 1, es decir si fue visitada
+ */
+boolean fueVisitada(int casilla) {
   return casilla == 1;
 }
 
-void hacerStack(int y, int x) { // genera el stack de las posiciones inicio
+/**
+ * subrutina que genera el stack de las posiciones de inicio
+ * @param y posición en Y de la casilla
+ * @param x posición en X de la casilla
+ */
+void hacerStack(int y, int x) {
   inicio[k][0] = y;
   inicio[k][1] = x;
   k++;
 }
 
-void hacerStack1(int y, int x) { // genera el stack de las posiciones final
+/**
+ * subrutina que genera el stack de las posiciones de final
+ * @param y posición en Y de la casilla
+ * @param x posición en X de la casilla
+ */
+void hacerStack1(int y, int x) {
   fin[l][0] = y;
   fin[l][1] = x;
   l++;
 }
 
+/**
+ * función que verifica si la casilla en la que está tiene alguna sin visitar alrededor
+ * @param filas las filas que tiene la matriz del laberinto
+ * @param columnas las columnas que tiene la matriz del laberinto
+ * @param y posición en Y de la casilla
+ * @param x posición en X de la casilla
+ */
 boolean tieneNoVisitadas(int y, int x, int filas, int columnas) { //
   if (y - 2 >= 1) {
     if (!fueVisitada(M[y - 2][x])) {
@@ -45,6 +67,8 @@ boolean tieneNoVisitadas(int y, int x, int filas, int columnas) { //
   }
   return false;
 }
+
+
 
 void backTrack(int k, int filas, int columnas) {
   if (k == 0) {

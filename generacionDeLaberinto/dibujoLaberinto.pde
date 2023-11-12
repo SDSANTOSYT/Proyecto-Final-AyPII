@@ -1,4 +1,4 @@
-public int n = 30;
+public int n = 10;
 public int filas = n*2+1;
 public int columnas = n*2+1;
 public int unidad = 900/filas;
@@ -14,7 +14,6 @@ void dibujarlab() { // subrutina para dibujar el laberinto
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       //noStroke();
-
       if (M[i][j] == 2) {
         fill(255, 162, 51);
         square(j*unidad + unidad/2, i*unidad, unidad);
@@ -55,20 +54,19 @@ void mouseClicked() { // subrutina para seleccionar la entrada y la salida
 void seleccionEntradaSalida() {
   mouseEnX = mouseX/unidad;
   mouseEnY = mouseY/unidad;
+  if (cont != 2){
   if (mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1) {
     noStroke();
     fill(51, 249, 255);
     square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
   }
-}
+}}
 
 
 void setup() {
-  frameRate(100);
-  size(900, 900);
+  size(1000, 1000);
   background(255);
   generarLaberinto(filas, columnas, 1, 1);
-  printMatrix();
   imprimirMatriz(M, filas, columnas, 0, 0);
   cont = 0;
 
