@@ -1,9 +1,13 @@
-public int ordX=1, ordY=1 ;
+
 public int posicX, posicY;
+
 void dibujarBolita (int y, int x) { //crear la "bolita" colores, tamaño y posicion
-  fill(#FF4D53);
-  circle(x*unidad+unidad/2, y*unidad+unidad/2, unidad);
+  if ( cont == 2 ) {
+    fill(#FF4D53);
+    circle(x*unidad+unidad/2, y*unidad+unidad/2, unidad);
+  }
 }
+
 void keyPressed () { // Hacemos que la bolita se mueva (cambio de posicion) con las teclas W, S, D, A
   if (key == 'w' && M[posicX-1][posicY]== 1) {
     posicX= posicX-1;
