@@ -1,7 +1,0 @@
-https://weblog.jamisbuck.org/2010/12/27/maze-generation-recursive-backtracking
-
-https://en.wikipedia.org/wiki/Maze_generation_algorithm
-
-https://www.uaeh.edu.mx/scige/boletin/huejutla/n1/a4.html
-
-https://www.youtube.com/watch?v=TZXH3G-npiY&ab_channel=Cacharritos%28AntonioRoyo%29
