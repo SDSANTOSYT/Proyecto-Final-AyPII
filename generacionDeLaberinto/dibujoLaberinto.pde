@@ -1,7 +1,7 @@
 public int n = 10;
 public int filas = n*2+1;
 public int columnas = n*2+1;
-public int unidad = 900/filas;
+public int unidad = 450/filas;
 
 int mouseEnX;
 int mouseEnY;
@@ -44,6 +44,11 @@ void mouseClicked() { // subrutina para seleccionar la entrada y la salida
       if (cont < 2) {
         viaje[cont][0] = mouseEnY;
         viaje[cont][1] = mouseEnX;
+        println(mouseEnY+" "+mouseEnX);
+        if(cont == 1){
+          posicX= mouseEnX;
+          posicY=mouseEnY;
+        }
         M[mouseEnY][mouseEnX] = 1;
         cont++;
       }
@@ -54,17 +59,19 @@ void mouseClicked() { // subrutina para seleccionar la entrada y la salida
 void seleccionEntradaSalida() {
   mouseEnX = mouseX/unidad;
   mouseEnY = mouseY/unidad;
-  if (cont != 2){
-  if (mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1) {
-    noStroke();
-    fill(51, 249, 255);
-    square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
+  if (cont != 2) {
+    if (mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1) {
+      noStroke();
+      fill(51, 249, 255);
+      square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
+    }
   }
-}}
+}
 
 
 void setup() {
-  size(1000, 1000);
+  size(900,900);
+  
   background(255);
   generarLaberinto(filas, columnas, 1, 1);
   imprimirMatriz(M, filas, columnas, 0, 0);
@@ -76,4 +83,5 @@ void setup() {
 
 void draw() {
   dibujarlab();
+  dibujarBolita(posicX,posicY);
 }
