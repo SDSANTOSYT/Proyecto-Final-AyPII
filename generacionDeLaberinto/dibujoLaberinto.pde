@@ -85,14 +85,17 @@ void mouseClicked() { // subrutina para seleccionar la entrada y la salida
   if ((mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1)) {
     if ((mouseEnX %2 != 0 && mouseEnY %2 == 0) || (mouseEnX %2 == 0 && mouseEnY %2 != 0)) {
       if (cont < 2) {
-        viaje[cont][0] = mouseEnY;
-        viaje[cont][1] = mouseEnX;
+        if ( cont == 0 ) {
+          posicX = mouseEnY;
+          posicY = mouseEnX;
+        }
         M[mouseEnY][mouseEnX] = 1;
         cont++;
       }
     }
   }
 }
+
 void seleccionEntradaSalida() {
   mouseEnX = mouseX/unidad;
   mouseEnY = mouseY/unidad;
@@ -115,4 +118,5 @@ void setup() {
 void draw() {
   dibujarlab();
   smoothDraw();
+  dibujarBolita(posicX, posicY);
 }
