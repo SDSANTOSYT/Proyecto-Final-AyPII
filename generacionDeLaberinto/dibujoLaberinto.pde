@@ -1,4 +1,4 @@
-public int n = 5;
+public int n = 10;
 public int filas = n*2+1;
 public int columnas = n*2+1;
 public int unidad = 900/filas;
@@ -7,7 +7,6 @@ int mouseEnY;
 int viaje[][] = new int[2][2];
 int cont;
 int MM[][] = new int[filas][columnas];
-
 
 void dibujarlab() { // subrutina para dibujar el laberinto
   background(#D499EF);
@@ -26,7 +25,7 @@ void dibujarlab() { // subrutina para dibujar el laberinto
         } else { // dibuja una pared vertical
           rect(j*unidad + unidad/2, i*unidad, unidad/2, unidad + unidad/2);
         }
-      } else if (M[i][j] == 1) {
+      } else if (M[i][j] == 1) { // si hay caminos dibuja un cuadrado de color claro
         noStroke();
         fill(#E0B8F2);
         square(j*unidad, i*unidad, unidad);
@@ -34,15 +33,13 @@ void dibujarlab() { // subrutina para dibujar el laberinto
       }
     }
   }
-  seleccionEntradaSalida();
+  seleccionEntradaSalida(); // se llama a la subrutina que dibuja la selección en la posición del mouse
 }
 
-public int randomColumna= 1;
-public int randomFila= 1;
+public int randomColumna= 0;
+public int randomFila= 0;
 
-
-
-void smoothDraw() {
+void smoothDraw() { // subrutina para mostrar el dibujo del laberinto por primera vez
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       if (M[i][j] == 2) {
@@ -66,7 +63,7 @@ void smoothDraw() {
     }
   }
 
-  if ( frameCount % 0.5 == 0 ) {
+  if ( frameCount % 0.0625 == 0 ) {
     if ( randomFila < filas ) {
       MM[randomFila][randomColumna] = 1;
       if ( randomColumna == columnas - 1 ) {
@@ -77,9 +74,8 @@ void smoothDraw() {
       }
     }
   }
+  seleccionEntradaSalida();
 }
-
-
 
 void mouseClicked() { // subrutina para seleccionar la entrada y la salida
   if ((mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1)) {
@@ -93,7 +89,8 @@ void mouseClicked() { // subrutina para seleccionar la entrada y la salida
     }
   }
 }
-void seleccionEntradaSalida() {
+
+void seleccionEntradaSalida() { // subrutina que dibuja el cuadro de selección en la posición en la que se encuentra el mouse
   mouseEnX = mouseX/unidad;
   mouseEnY = mouseY/unidad;
   if (cont != 2) {
@@ -104,8 +101,9 @@ void seleccionEntradaSalida() {
     }
   }
 }
+
 void setup() {
-  size(1000, 1000);
+  size(1600, 900);
   background(255);
   generarLaberinto(filas, columnas, 1, 1);
   imprimirMatriz(M, filas, columnas, 0, 0);

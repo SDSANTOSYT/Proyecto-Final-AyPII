@@ -69,7 +69,12 @@ boolean tieneNoVisitadas(int y, int x, int filas, int columnas) { //
 }
 
 
-
+/**
+ * subrutina que realiza el backtrack hacia las posiciones guardadas anteriormente
+ * @param filas las filas que tiene la matriz del laberinto
+ * @param columnas las columnas que tiene la matriz del laberinto
+ * @param k es la posición en la pila hacia la que se hace backtrack
+ */
 void backTrack(int k, int filas, int columnas) {
   if (k == 0) {
     i = inicio[0][0];
@@ -83,6 +88,14 @@ void backTrack(int k, int filas, int columnas) {
   }
 }
 
+
+/**
+ * subrutina que genera el laberinto en una matriz donde los 0 representan paredes y los 1 representan caminos
+ * @param filas las filas que tiene la matriz del laberinto
+ * @param columnas las columnas que tiene la matriz del laberinto
+ * @param y posición en Y de la casilla en la que se encuentra
+ * @param x posición en X de la casilla en la que se encuentra
+ */
 void generarLaberinto(int filas, int columnas, int y, int x) {
   M[y][x] = 1;
   if (tieneNoVisitadas(y, x, filas, columnas)) {
