@@ -18,7 +18,7 @@ void dibujarlab() { // subrutina para dibujar el laberinto
         square(j*unidad + unidad/2, i*unidad, unidad);
       } else if (M[i][j] == 0) { // dibuja las paredes
         fill(#612F77);
-        if ((j == 0 || i == 0 || j == columnas -1 || i == filas -1)) { // si está en el borde solo dibuja un cuadrado
+        if (j == 0 || i == 0 || j == columnas -1 || i == filas -1) { // si está en el borde solo dibuja un cuadrado
           square(j*unidad + unidad/2, i*unidad, unidad);
         } else if (i%2 == 0) { // dibuja una pared horizontal
           rect(j*unidad + unidad/2, i*unidad + unidad/2, unidad, unidad/2);
