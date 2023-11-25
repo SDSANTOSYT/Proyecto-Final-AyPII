@@ -1,11 +1,14 @@
-
-
+//librerias para cajas de texto
+import g4p_controls.*;
+import java.awt.Font;
+PImage fondoPrin, fondoCredits, Reiniciar, Bombilla;
 static int M[][] = new int[100][100]; // Matriz donde se van generando los caminos
 static int Z[][] = new int[100][100];
 static int inicio[][] = new int[10000][2]; // inicio de los caminos
 static int fin[][] = new int[10000][2]; // fin de los caminos
 static int k = 0, l = 0, i, j, direccion;
-
+GTextField textField;
+float m;
 /**
  * función que me dice si una casilla ya ha sido visitada
  * @param casilla
