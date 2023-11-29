@@ -13,9 +13,7 @@ void inicio(){
   botons(550,400,400,50,2,"Play",50);
   botons(550,500,400,50,3,"Credits",50);
   botons(550,600,400,50,4,"Exit",50);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
+
 }
 
 //juego
@@ -29,11 +27,6 @@ void juego(){
         image(Bombilla,1295,10);
         textField.setVisible(false);
         textField2.setVisible(false);
-        String nombre = textField .getText();
-        println(nombre); 
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
 }
 //  tutorial 1
 void tutorial1(){
@@ -43,15 +36,12 @@ void tutorial1(){
         textField.setVisible(false);
         textField2.setVisible(false);
         botons(1150,800,400,50,22,"Continuar", 50);
-        botons(1180,20,400,50,27,"Saltar tutorial", 50);
+        botons(100,20,400,50,27,"Saltar tutorial", 50);
         String texto = "Hola, " + nombre + " , mi nombre es MINHO y te doy la bienvenida a mi laberinto.";
         fill(0);
         text(texto, 555, 670, 780, 280);
         fill(#D91EFF);
         text(texto, 550, 670, 780, 320);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
 }
 
 void tutorial2(){
@@ -59,11 +49,8 @@ void tutorial2(){
         image(fondoTutorial2,0,0);
         textField.setVisible(false);
         textField2.setVisible(false);
-        botons(1150,800,400,50,23,"Continuar", 50);
-        botons(1180,20,400,50,27,"Saltar tutorial", 50);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
+        botons(580,800,400,50,23,"Continuar", 50);
+        botons(100,20,400,50,27,"Saltar tutorial", 50);
 }
 
 void tutorial3(){
@@ -72,10 +59,7 @@ void tutorial3(){
         textField.setVisible(false);
         textField2.setVisible(false);
         botons(1150,800,400,50,24,"Continuar", 50);
-        botons(1180,20,400,50,27,"Saltar tutorial", 50);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
+        botons(100,20,400,50,27,"Saltar tutorial", 50);
 }
 
 void tutorial4(){
@@ -83,11 +67,8 @@ void tutorial4(){
         image(fondoTutorial4,0,0);
         textField.setVisible(false);
         textField2.setVisible(false);
-        botons(1150,800,400,50,25,"Continuar", 50);
-        botons(1180,20,400,50,27,"Saltar tutorial", 50);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
+        botons(580,800,400,50,25,"Continuar", 50);
+        botons(100,20,400,50,27,"Saltar tutorial", 50);
 }
 
 void tutorial5(){
@@ -96,20 +77,16 @@ void tutorial5(){
         textField.setVisible(false);
         textField2.setVisible(false);
         botons(1150,800,400,50,26,"Continuar", 50);
-        botons(1180,20,400,50,27,"Saltar tutorial", 50);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
+        botons(100,20,400,50,27,"Saltar tutorial", 50);
+
 }
 void tutorial6(){
         size(1600,900);
         image(buenaSuerte,0,0);
         textField.setVisible(false);
         textField2.setVisible(false);
-        botons(1150,800,400,50,27,"Continuar", 50);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
+        botons(580,800,400,50,27,"Continuar", 50);
+
 }
 
 void nombreDimension(){
@@ -124,9 +101,7 @@ void nombreDimension(){
         println(nombre); 
         botons(580,800,400,50,21,"Continuar", 50);
         botons(1150,800,400,50,1,"Volver al inicio", 50);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
+
 }
 
 
@@ -134,9 +109,7 @@ void creditos(){
        size(1600,900);
        image(fondoCredits,0,0);
        botons(1150,800,400,50,1,"Volver", 50);
-  //fill(255);
-  //textSize(50);
-  //text("Jugar", 300, 340);
+
 }
 //subrutina para agregar botones
 void botons(int x, int y, int w, int   h, int window, String texto, int r){

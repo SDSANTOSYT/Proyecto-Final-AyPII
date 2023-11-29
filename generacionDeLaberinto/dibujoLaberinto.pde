@@ -90,7 +90,6 @@ if(op == 21 && (mouseX >= 580 && mouseX <= 980) && (mouseY >= 800 && mouseY <= 8
   unidad = 900/filas;
   generarLab = true;
   generarLaberinto(filas, columnas, 1, 1);
-  imprimirMatriz(M, filas, columnas, 0, 0);
 }
 
 if(op == 1 && (mouseX >= 1150 && mouseX <= 1550) && (mouseY >= 800 && mouseY <= 850)){
