@@ -7,7 +7,7 @@ int mouseEnY;
 int distX, distY, numberOfFrames;
 int viaje[][] = new int[2][2];
 int cont;
-int MM[][] = new int[filas][columnas];
+int MM[][] = new int[100][100];
 PFont font, fuente;
 int op = 1;
 
@@ -156,7 +156,7 @@ void draw() {
     nombreDimension();
     if(op ==  21 && n != -1 && nombre.length() <= 10){
         juego();
-        switch(op){
+        /*switch(op){
         case 211:
           
 
@@ -164,7 +164,7 @@ void draw() {
         case 212:
     
     
-      }
+      }*/
     
     
     }else{
@@ -188,6 +188,10 @@ void draw() {
   //salir 
   case 4:
      exit();
+  break;
+  // ventana del juego
+  case 21:
+  juego();
   break;
   }
 }
