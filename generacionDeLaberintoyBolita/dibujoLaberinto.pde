@@ -1,4 +1,4 @@
-public int n = 5;
+public int n = 10;
 public int filas = n*2+1;
 public int columnas = n*2+1;
 public int unidad = 450/filas;
@@ -34,7 +34,7 @@ void dibujarlab() { // subrutina para dibujar el laberinto
       }
     }
   }
-  seleccionEntradaSalida();
+  //seleccionEntradaSalida();
 }
 
 public int randomColumna= 1;
@@ -77,34 +77,51 @@ void smoothDraw() {
   }
 }
 
+void drawSelection() {
+  int mouseAtRow = mouseX / unidad ;
+  int mouseAtColumn = mouseY / unidad;
 
+  fill (0, 255, 0, 50);
+  square( mouseAtRow * unidad, mouseAtColumn * unidad, unidad );
+}
 
-void mouseClicked() { // subrutina para seleccionar la entrada y la salida
-  if ((mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1)) {
-    if ((mouseEnX %2 != 0 && mouseEnY %2 == 0) || (mouseEnX %2 == 0 && mouseEnY %2 != 0)) {
-      if (cont < 2) {
-        if ( cont == 0 ) {
-          posicX = mouseEnY;
-          posicY = mouseEnX;
+void mouseClicked() {
+  int selectedRow = mouseX / unidad ;
+  int selectedColumn = mouseY / unidad;
+
+  if ( count < 2 ) {
+    if ( selectedRow % 2 != 0 || selectedColumn % 2 != 0 ) {
+      if ( (selectedRow == 0) || (selectedRow == 2*n) || (selectedColumn == 0) || (selectedColumn == 2*n) ) {
+        if ( count == 0 ) {
+          entryRow = selectedRow;
+          entryCol = selectedColumn;
+          println(entryRow+" "+entryCol);
+        } else {
+          exitRow = selectedRow;
+          exitCol = selectedColumn;
+          println(exitRow+" "+exitCol);
         }
-        M[mouseEnY][mouseEnX] = 1;
-        cont++;
+        M[selectedColumn][selectedRow] = 1;
+        count++;
       }
     }
   }
-}
-
-void seleccionEntradaSalida() {
-  mouseEnX = mouseX/unidad;
-  mouseEnY = mouseY/unidad;
-  if (cont != 2) {
-    if ((mouseEnX == 0 && mouseEnY < filas) || (mouseEnY == 0 && mouseEnX < columnas) || (mouseEnX == columnas -1 && mouseEnY < filas) || (mouseEnY == filas -1 && mouseEnX < columnas)) {
-      noStroke();
-      fill(#E0B8F2, 170);
-      square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
-    }
+  if ( count == 2 ) {
+    directionPriority(entryRow, exitRow, entryCol, exitCol);
+    solveMaze(entryRow, exitRow, entryCol, exitCol);
   }
 }
+//void seleccionEntradaSalida() {
+//  mouseEnX = mouseX/unidad;
+//  mouseEnY = mouseY/unidad;
+//  if (cont != 2) {
+//    if ((mouseEnX == 0 && mouseEnY < filas) || (mouseEnY == 0 && mouseEnX < columnas) || (mouseEnX == columnas -1 && mouseEnY < filas) || (mouseEnY == filas -1 && mouseEnX < columnas)) {
+//      noStroke();
+//      fill(#E0B8F2, 170);
+//      square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
+//    }
+//  }
+//}
 
 void setup() {
   size(1000, 1000);
@@ -112,10 +129,24 @@ void setup() {
   generarLaberinto(filas, columnas, 1, 1);
   imprimirMatriz(M, filas, columnas, 0, 0);
   cont = 0;
+   
+
 }
 
+int iii= 0;
 void draw() {
-  dibujarlab();
+ dibujarlab();
   smoothDraw();
-  dibujarBolita(posicX,posicY);
+  dibujarBolita(posicX, posicY);
+  drawSelection();
+  if ( count == 2 ) {
+    drawSteps();
+    
+  }
+}
+
+void drawSteps() {
+    fill(255,0,255,90);
+    square(explored[iii][1]*unidad, explored[iii][0]*unidad,unidad);
+    iii++;
 }

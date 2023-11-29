@@ -1,5 +1,4 @@
 
-
 static int M[][] = new int[100][100]; // Matriz donde se van generando los caminos
 static int Z[][] = new int[100][100];
 static int inicio[][] = new int[10000][2]; // inicio de los caminos
@@ -31,7 +30,7 @@ void hacerStack(int y, int x) {
  * @param y posición en Y de la casilla
  * @param x posición en X de la casilla
  */
-void hacerStack1(int y, int x) {
+ void hacerStack1(int y, int x) {
   fin[l][0] = y;
   fin[l][1] = x;
   l++;
