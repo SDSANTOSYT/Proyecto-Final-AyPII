@@ -86,8 +86,8 @@ void drawSelection() {
 }
 
 void mouseClicked() {
-  int selectedRow = mouseX / unidad ;
-  int selectedColumn = mouseY / unidad;
+  int selectedRow = mouseY / unidad ;
+  int selectedColumn = mouseX / unidad;
 
   if ( count < 2 ) {
     if ( selectedRow % 2 != 0 || selectedColumn % 2 != 0 ) {
@@ -101,7 +101,7 @@ void mouseClicked() {
           exitCol = selectedColumn;
           println(exitRow+" "+exitCol);
         }
-        M[selectedColumn][selectedRow] = 1;
+        M[selectedRow][selectedColumn] = 1;
         count++;
       }
     }
@@ -147,6 +147,6 @@ void draw() {
 
 void drawSteps() {
     fill(255,0,255,90);
-    square(explored[iii][1]*unidad, explored[iii][0]*unidad,unidad);
+    square(explored[iii][0]*unidad, explored[iii][1]*unidad,unidad);
     iii++;
 }
