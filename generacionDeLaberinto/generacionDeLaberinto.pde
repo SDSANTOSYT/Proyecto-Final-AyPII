@@ -37,7 +37,7 @@ void hacerStack(int y, int x) {
  * @param y posición en Y de la casilla
  * @param x posición en X de la casilla
  */
- void hacerStack1(int y, int x) {
+void hacerStack1(int y, int x) {
   fin[l][0] = y;
   fin[l][1] = x;
   l++;
@@ -130,7 +130,7 @@ void generarLaberinto(int filas, int columnas, int y, int x) {
       generarLaberinto(filas, columnas, y, x);
       break;
     case 3:
-      if (x - 2 >= 1) { 
+      if (x - 2 >= 1) {
         if (!fueVisitada(M[y][x - 2])) {
           hacerStack(y, x);
           M[y][x-1] = 1;

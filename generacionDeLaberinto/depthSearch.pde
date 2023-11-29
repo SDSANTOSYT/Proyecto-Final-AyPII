@@ -3,7 +3,7 @@ public static int frontier[][] = new int[1000][2];
 public static int popped[][] = new int[2][2];
 public static int currentCell[][] = new int[2][2];
 public static int frontierIndex;
-public static int exploredIndex;
+public static int exploredIndex=-1;
 
 
 int entryRow= 1;
@@ -17,7 +17,7 @@ char moveTo [] = new char[4];
 
 void directionPriority(int filEntrada, int filSalida, int colEntrada, int colSalida) { // Determina la prioridad de las direcciones de movimiento (Norte, Sur, Este, Oeste) en función de entrada y salida
   boolean state = ((colEntrada - colSalida) > (filEntrada - filSalida));
-  
+
   int i = 0;
   while (i < 2) {
     if (state) {
@@ -41,7 +41,7 @@ void directionPriority(int filEntrada, int filSalida, int colEntrada, int colSal
     state = !state;
   }
 }
-void popMethod() { //Extrae una celda de la pila de la frontera 
+void popMethod() { //Extrae una celda de la pila de la frontera
   popped[0][0] = frontier[frontierIndex][0];
   popped[0][1] = frontier[frontierIndex][1];
   frontier[frontierIndex][0] = 0;

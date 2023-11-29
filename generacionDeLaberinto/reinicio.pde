@@ -7,15 +7,10 @@ void reiniciarMatrizLab() {
 }
 
 void reiniciarSeleccion() {
-  cont = 0;
-  for (int i = 0; i < 2; i++) {
-    for (int j = 0; j < 2; j++) {
-      viaje[i][j] = 0;
-    }
-  }
+  count = 0;
 }
 
-void reiniciarDibujoMatriz(){
+void reiniciarDibujoMatriz() {
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       MM[i][j] = 0;
@@ -23,4 +18,19 @@ void reiniciarDibujoMatriz(){
   }
   randomColumna = 0;
   randomFila = 0;
+}
+
+void reiniciarBusqueda() {
+  for (int i = 0; i < frontierIndex; i++) {
+    for (int j = 0; j < 2; j++) {
+      frontier[i][j] = 0;
+    }
+  }
+  for (int i = 0; i < exploredIndex; i++) {
+    for (int j = 0; j < 2; j++) {
+      explored[i][j] = 0;
+    }
+  }
+  frontierIndex = 0;
+  exploredIndex = -1;
 }
