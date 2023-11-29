@@ -1,4 +1,4 @@
-public int n = 5;
+public int n = 10;
 public int filas = n*2+1;
 public int columnas = n*2+1;
 public int unidad = 450/filas;
@@ -15,8 +15,9 @@ void dibujarlab() { // subrutina para dibujar el laberinto
     for (int j = 0; j < columnas; j++) {
       //noStroke();
       if (M[i][j] == 2) {
-        fill(255, 162, 51);
-        square(j*unidad + unidad/2, i*unidad, unidad);
+        fill(255,0,255,90);
+        square(j*unidad, i*unidad, unidad);
+        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
       } else if (M[i][j] == 0) { // dibuja las paredes
         fill(#612F77);
         if ((j == 0 || i == 0 || j == columnas -1 || i == filas -1)) { // si está en el borde solo dibuja un cuadrado
@@ -34,7 +35,7 @@ void dibujarlab() { // subrutina para dibujar el laberinto
       }
     }
   }
-  seleccionEntradaSalida();
+  //seleccionEntradaSalida();
 }
 
 public int randomColumna= 1;
@@ -44,8 +45,9 @@ void smoothDraw() {
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       if (M[i][j] == 2) {
-        fill(255, 162, 51);
-        square(j*unidad + unidad/2, i*unidad, unidad);
+        fill(255,0,255,90);
+        square(j*unidad, i*unidad, unidad);
+        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
       } else if (MM[i][j] == 0) { // dibuja las paredes
         fill(#612F77);
         if ((j == 0 || i == 0 || j == columnas -1 || i == filas -1)) { // si está en el borde solo dibuja un cuadrado
@@ -77,34 +79,51 @@ void smoothDraw() {
   }
 }
 
+void drawSelection() {
+  int mouseAtRow = mouseX / unidad ;
+  int mouseAtColumn = mouseY / unidad;
 
+  fill (0, 255, 0, 50);
+  square( mouseAtRow * unidad, mouseAtColumn * unidad, unidad );
+}
 
-void mouseClicked() { // subrutina para seleccionar la entrada y la salida
-  if ((mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1)) {
-    if ((mouseEnX %2 != 0 && mouseEnY %2 == 0) || (mouseEnX %2 == 0 && mouseEnY %2 != 0)) {
-      if (cont < 2) {
-        if ( cont == 0 ) {
-          posicX = mouseEnY;
-          posicY = mouseEnX;
+void mouseClicked() {
+  int selectedRow = mouseY / unidad ;
+  int selectedColumn = mouseX / unidad;
+
+  if ( count < 2 ) {
+    if ( selectedRow % 2 != 0 || selectedColumn % 2 != 0 ) {
+      if ( (selectedRow == 0) || (selectedRow == 2*n) || (selectedColumn == 0) || (selectedColumn == 2*n) ) {
+        if ( count == 0 ) {
+          entryRow = selectedRow;
+          entryCol = selectedColumn;
+          println(entryRow+" "+entryCol);
+        } else {
+          exitRow = selectedRow;
+          exitCol = selectedColumn;
+          println(exitRow+" "+exitCol);
         }
-        M[mouseEnY][mouseEnX] = 1;
-        cont++;
+        M[selectedRow][selectedColumn] = 1;
+        count++;
       }
     }
   }
-}
-
-void seleccionEntradaSalida() {
-  mouseEnX = mouseX/unidad;
-  mouseEnY = mouseY/unidad;
-  if (cont != 2) {
-    if ((mouseEnX == 0 && mouseEnY < filas) || (mouseEnY == 0 && mouseEnX < columnas) || (mouseEnX == columnas -1 && mouseEnY < filas) || (mouseEnY == filas -1 && mouseEnX < columnas)) {
-      noStroke();
-      fill(#E0B8F2, 170);
-      square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
-    }
+  if ( count == 2 ) {
+    directionPriority(entryRow, exitRow, entryCol, exitCol);
+    solveMaze(entryRow, exitRow, entryCol, exitCol);
   }
 }
+//void seleccionEntradaSalida() {
+//  mouseEnX = mouseX/unidad;
+//  mouseEnY = mouseY/unidad;
+//  if (cont != 2) {
+//    if ((mouseEnX == 0 && mouseEnY < filas) || (mouseEnY == 0 && mouseEnX < columnas) || (mouseEnX == columnas -1 && mouseEnY < filas) || (mouseEnY == filas -1 && mouseEnX < columnas)) {
+//      noStroke();
+//      fill(#E0B8F2, 170);
+//      square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
+//    }
+//  }
+//}
 
 void setup() {
   size(1000, 1000);
@@ -112,10 +131,28 @@ void setup() {
   generarLaberinto(filas, columnas, 1, 1);
   imprimirMatriz(M, filas, columnas, 0, 0);
   cont = 0;
+   
+
 }
 
+int iii= 0;
 void draw() {
-  dibujarlab();
+ dibujarlab();
   smoothDraw();
-  dibujarBolita(posicX,posicY);
+  dibujarBolita(posicX, posicY);
+  drawSelection();
+  if ( count == 2  && iii < filas*columnas) {
+    drawSteps();
+    
+  }
+}
+
+void drawSteps() {
+  M[explored[iii][0]][explored[iii][1]] = 2;
+    //fill(255,0,255,90);
+    //square(explored[iii][0]*unidad, explored[iii][1]*unidad,unidad);
+    if( !(explored[iii][0] == exitRow && explored[iii][1] == exitCol) ){
+      iii++;
+    }
+    
 }
