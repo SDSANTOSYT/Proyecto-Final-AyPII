@@ -1,11 +1,17 @@
-
-
+//librerias para cajas de texto
+import g4p_controls.*;
+import java.awt.Font;
+PImage fondoPrin, fondoCredits, Reiniciar, Bombilla, fondoNombre, fondoTutorial1, personaje, fondoTutorial2, fondoTutorial3, fondoTutorial4, fondoTutorial5, buenaSuerte;
 static int M[][] = new int[100][100]; // Matriz donde se van generando los caminos
 static int Z[][] = new int[100][100];
 static int inicio[][] = new int[10000][2]; // inicio de los caminos
 static int fin[][] = new int[10000][2]; // fin de los caminos
 static int k = 0, l = 0, i, j, direccion;
-
+GTextField textField, textField2;
+GSlider sliderDimension;
+float m;
+String nombre = "Player";
+boolean generarLab =  false;
 /**
  * función que me dice si una casilla ya ha sido visitada
  * @param casilla
@@ -69,7 +75,12 @@ boolean tieneNoVisitadas(int y, int x, int filas, int columnas) { //
 }
 
 
-
+/**
+ * subrutina que realiza el backtrack hacia las posiciones guardadas anteriormente
+ * @param filas las filas que tiene la matriz del laberinto
+ * @param columnas las columnas que tiene la matriz del laberinto
+ * @param k es la posición en la pila hacia la que se hace backtrack
+ */
 void backTrack(int k, int filas, int columnas) {
   if (k == 0) {
     i = inicio[0][0];
@@ -83,6 +94,14 @@ void backTrack(int k, int filas, int columnas) {
   }
 }
 
+
+/**
+ * subrutina que genera el laberinto en una matriz donde los 0 representan paredes y los 1 representan caminos
+ * @param filas las filas que tiene la matriz del laberinto
+ * @param columnas las columnas que tiene la matriz del laberinto
+ * @param y posición en Y de la casilla en la que se encuentra
+ * @param x posición en X de la casilla en la que se encuentra
+ */
 void generarLaberinto(int filas, int columnas, int y, int x) {
   M[y][x] = 1;
   if (tieneNoVisitadas(y, x, filas, columnas)) {
