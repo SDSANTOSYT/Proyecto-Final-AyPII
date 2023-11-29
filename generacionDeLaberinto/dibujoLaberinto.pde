@@ -1,7 +1,7 @@
-public int n = 5;
-public int filas = n*2+1;
-public int columnas = n*2+1;
-public int unidad = 900/filas;
+public int n ;
+public int filas;
+public int columnas;
+public int unidad = 1;
 int mouseEnX;
 int mouseEnY;
 int distX, distY, numberOfFrames;
@@ -84,10 +84,18 @@ void smoothDraw() {
 
 
 void mouseClicked() { // subrutina para seleccionar la entrada y la salida
+if(op == 21 && (mouseX >= 580 && mouseX <= 980) && (mouseY >= 800 && mouseY <= 850) && generarLab == false && n != -1 && nombre.length() <= 10){
+  filas = n*2+1;
+  columnas = n*2+1;
+  unidad = 900/filas;
+  generarLab = true;
+  generarLaberinto(filas, columnas, 1, 1);
+  imprimirMatriz(M, filas, columnas, 0, 0);
+}
   if ((mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1)) {
     if ((mouseEnX %2 != 0 && mouseEnY %2 == 0) || (mouseEnX %2 == 0 && mouseEnY %2 != 0)) {
       if (cont < 2) {
-        viaje[cont][0] = mouseEnY;
+        viaje[cont][0] = mouseEnY;  
         viaje[cont][1] = mouseEnX;
         M[mouseEnY][mouseEnX] = 1;
         cont++;
@@ -95,6 +103,7 @@ void mouseClicked() { // subrutina para seleccionar la entrada y la salida
     }
   }
 }
+
 void seleccionEntradaSalida() {
   mouseEnX = mouseX/unidad;
   mouseEnY = mouseY/unidad;
@@ -109,8 +118,9 @@ void seleccionEntradaSalida() {
 void setup() {
   size(1600, 900);
   background(255);
-  generarLaberinto(filas, columnas, 1, 1);
-  imprimirMatriz(M, filas, columnas, 0, 0);
+
+ 
+
   cont = 0;
   Font customFont = new Font("Arial Black", Font.BOLD, 30);
   font = createFont("New Athletic M54.ttf", 100);
@@ -118,14 +128,22 @@ void setup() {
   fondoCredits = loadImage("Creditos.jpg");
   Reiniciar = loadImage("Reiniciar.png");
   Bombilla = loadImage("Bombilla.png");
-  // Create a text field
-    textField = new GTextField(this, 275, 580, 620, 40);
-    textField.setPromptText("Ingrese su nombre");
+  fondoNombre = loadImage("nombreDimension.jpg");
+  // Create a text field name
+    textField = new GTextField(this, 475, 180, 620, 70);
+    textField.setPromptText("Ingrese su primer nombre");
     textField.setFont(customFont);
     textField.setOpaque(true);
     textField.setVisible(false);
+  // Create a text field name
+    textField2 = new GTextField(this, 475, 700, 620, 70);
+    textField2.setPromptText("Ingrese la dimension de 1 a 48");
+    textField2.setFont(customFont);
+    textField2.setOpaque(true);
+    textField2.setVisible(false);
+    // Create a slider dimension
+    //sliderDimension = new GSlider(this, 475,700, 620, 70);
 }
-
 void draw() {
   // Switch que depende de op y indica la ventana a imprimir
   switch(op){
@@ -135,38 +153,37 @@ void draw() {
   break;
   //Ventana jugar
   case 2:
-    switch(op){
-      case 21:
+    nombreDimension();
+    if(op ==  21 && n != -1 && nombre.length() <= 10){
+        juego();
+        switch(op){
+        case 211:
+          
+
       
-        if(op == 211){
-        dibujarlab();
-        smoothDraw();
-        botons(1150,800,400,50,1,"Volver al inicio", 50);
-        botons(1468,16,115,115,21,"", 5000);
-        image(Reiniciar,1460,10);
-        botons(1302,16,115,115,212,"", 5000);
-        image(Bombilla,1300,10);
-        textField.setVisible(true);
-        String nombre = textField .getText();
-        println(nombre); 
-        
-        }else{
-          if(op == 212){
-          
-          }
-          
-        }
-      case 22:
+        case 212:
     
+    
+      }
+    
+    
+    }else{
+      if(nombre.length() > 10){
+     String s = "Nombre ingresado invalido, solo ingrese su primer nombre.";
+      fill(0);
+      text(s, 405, 270, 780, 280);
+      fill(#FF1A1A);
+      text(s, 400, 270, 780, 320);
+      }
+    op = 2;
     
     }
+    
     
   break;
   //ventana creditos
   case 3:
-    size(1600,900);
-    image(fondoCredits,0,0);
-    botons(1150,800,400,50,1,"Volver", 50);
+    creditos();
   break;
   //salir 
   case 4:
