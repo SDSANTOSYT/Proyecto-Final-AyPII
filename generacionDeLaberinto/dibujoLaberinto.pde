@@ -92,6 +92,15 @@ if(op == 21 && (mouseX >= 580 && mouseX <= 980) && (mouseY >= 800 && mouseY <= 8
   generarLaberinto(filas, columnas, 1, 1);
   imprimirMatriz(M, filas, columnas, 0, 0);
 }
+
+if(op == 1 && (mouseX >= 1150 && mouseX <= 1550) && (mouseY >= 800 && mouseY <= 850)){
+  generarLab = false;
+}
+
+if(op == 2 && (mouseX >= 1468 && mouseX <= 1583) && (mouseY >= 16 && mouseY <= 131)){
+  generarLab = false;
+}
+
   if ((mouseEnX == 0 || mouseEnY == 0 || mouseEnX == columnas -1 || mouseEnY == filas -1)) {
     if ((mouseEnX %2 != 0 && mouseEnY %2 == 0) || (mouseEnX %2 == 0 && mouseEnY %2 != 0)) {
       if (cont < 2) {
@@ -129,6 +138,13 @@ void setup() {
   Reiniciar = loadImage("Reiniciar.png");
   Bombilla = loadImage("Bombilla.png");
   fondoNombre = loadImage("nombreDimension.jpg");
+  fondoTutorial1 = loadImage("Tutorial1.jpg");
+  fondoTutorial2 = loadImage("Tutorial2.jpg");
+  fondoTutorial3 = loadImage("Tutorial3.jpg");
+  fondoTutorial4 = loadImage("Tutorial4.jpg");
+  fondoTutorial5 = loadImage("Tutorial5.jpg");
+  buenaSuerte = loadImage("Buena suerte.jpg");
+  personaje = loadImage("Personaje.png");
   // Create a text field name
     textField = new GTextField(this, 475, 180, 620, 70);
     textField.setPromptText("Ingrese su primer nombre");
@@ -154,19 +170,8 @@ void draw() {
   //Ventana jugar
   case 2:
     nombreDimension();
-    if(op ==  21 && n != -1 && nombre.length() <= 10){
-        juego();
-        /*switch(op){
-        case 211:
-          
-
-      
-        case 212:
-    
-    
-      }*/
-    
-    
+    if(op == 1){
+    }else if(op ==  21 && n != -1 && nombre.length() <= 10){
     }else{
       if(nombre.length() > 10){
      String s = "Nombre ingresado invalido, solo ingrese su primer nombre.";
@@ -191,6 +196,24 @@ void draw() {
   break;
   // ventana del juego
   case 21:
+  tutorial1();
+  break;
+  case 22:
+  tutorial2();
+  break;
+  case 23:
+  tutorial3();
+  break;
+  case 24:
+  tutorial4();
+  break;
+  case 25:
+  tutorial5();
+  break;  
+  case 26:
+  tutorial6();
+  break;
+  case 27:
   juego();
   break;
   }
