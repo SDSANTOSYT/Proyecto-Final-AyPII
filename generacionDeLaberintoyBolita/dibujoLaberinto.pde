@@ -15,8 +15,9 @@ void dibujarlab() { // subrutina para dibujar el laberinto
     for (int j = 0; j < columnas; j++) {
       //noStroke();
       if (M[i][j] == 2) {
-        fill(255, 162, 51);
-        square(j*unidad + unidad/2, i*unidad, unidad);
+        fill(255,0,255,90);
+        square(j*unidad, i*unidad, unidad);
+        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
       } else if (M[i][j] == 0) { // dibuja las paredes
         fill(#612F77);
         if ((j == 0 || i == 0 || j == columnas -1 || i == filas -1)) { // si está en el borde solo dibuja un cuadrado
@@ -44,8 +45,9 @@ void smoothDraw() {
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       if (M[i][j] == 2) {
-        fill(255, 162, 51);
-        square(j*unidad + unidad/2, i*unidad, unidad);
+        fill(255,0,255,90);
+        square(j*unidad, i*unidad, unidad);
+        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
       } else if (MM[i][j] == 0) { // dibuja las paredes
         fill(#612F77);
         if ((j == 0 || i == 0 || j == columnas -1 || i == filas -1)) { // si está en el borde solo dibuja un cuadrado
@@ -139,14 +141,18 @@ void draw() {
   smoothDraw();
   dibujarBolita(posicX, posicY);
   drawSelection();
-  if ( count == 2 ) {
+  if ( count == 2  && iii < filas*columnas) {
     drawSteps();
     
   }
 }
 
 void drawSteps() {
-    fill(255,0,255,90);
-    square(explored[iii][0]*unidad, explored[iii][1]*unidad,unidad);
-    iii++;
+  M[explored[iii][0]][explored[iii][1]] = 2;
+    //fill(255,0,255,90);
+    //square(explored[iii][0]*unidad, explored[iii][1]*unidad,unidad);
+    if( !(explored[iii][0] == exitRow && explored[iii][1] == exitCol) ){
+      iii++;
+    }
+    
 }

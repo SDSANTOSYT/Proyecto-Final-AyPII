@@ -60,8 +60,8 @@ boolean isAvaliable(int childCellY, int childCellX) { // verificar una celda dad
 
 public static boolean isExplored(int childCellY, int childCellX) { //comprueba si una celda ha sido explorada
   boolean wasIn = false;
-  for (int i = 0; i < exploredIndex; i++) {
-    if ((explored[i][1] == childCellY) && (explored[i][0] == childCellX)) {
+  for (int i = 0; i < exploredIndex+1; i++) {
+    if ((explored[i][0] == childCellY) && (explored[i][1] == childCellX)) {
       wasIn = true;
     }
   }
@@ -97,14 +97,14 @@ void avaliableDirection(int currentCellX, int currentCellY) { //desde la celda a
 
 void stackAtFrontier(int atY, int atX) {// Agregan una celda a la pila de la frontera
   frontierIndex = frontierIndex + 1;
-  frontier[frontierIndex][0] = atX;
-  frontier[frontierIndex][1] = atY;
+  frontier[frontierIndex][0] = atY;
+  frontier[frontierIndex][1] = atX;
 }
 
 void stackAtExplored(int atY, int atX) {// Agrega una celda a la lista de celdas exploradas,
   exploredIndex = exploredIndex + 1;
-  explored[exploredIndex][0] = atX;
-  explored[exploredIndex][1] = atY;
+  explored[exploredIndex][0] = atY;
+  explored[exploredIndex][1] = atX;
 }
 
 void solveMaze(int startRow, int exitRow, int startColumn, int exitColumn) { //Extrae una celda de la pila de la frontera, actualiza la celda actual y explora las direcciones disponibles hasta alcanzar la salida o hasta que no haya más celdas en la frontera
@@ -115,6 +115,6 @@ void solveMaze(int startRow, int exitRow, int startColumn, int exitColumn) { //E
     popMethod();
     currentCell[0][0] = popped[0][0];
     currentCell[0][1] = popped[0][1];
-    avaliableDirection(currentCell[0][0], currentCell[0][1]);
+    avaliableDirection(currentCell[0][1], currentCell[0][0]);
   }
 }
