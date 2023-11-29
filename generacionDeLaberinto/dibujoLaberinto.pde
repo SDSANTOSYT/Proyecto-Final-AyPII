@@ -1,13 +1,15 @@
-public int n = 10;
-public int filas = n*2+1;
-public int columnas = n*2+1;
-public int unidad = 450/filas;
+public int n ;
+public int filas;
+public int columnas;
+public int unidad = 1;
 int mouseEnX;
 int mouseEnY;
+int distX, distY, numberOfFrames;
 int viaje[][] = new int[2][2];
 int cont;
-int MM[][] = new int[filas][columnas];
-
+int MM[][] = new int[100][100];
+PFont font, fuente;
+int op = 1;
 
 void dibujarlab() { // subrutina para dibujar el laberinto
   background(#D499EF);
@@ -91,6 +93,22 @@ void mouseClicked() {
   int selectedRow = mouseY / unidad ;
   int selectedColumn = mouseX / unidad;
 
+  if(op == 21 && (mouseX >= 580 && mouseX <= 980) && (mouseY >= 800 && mouseY <= 850) && generarLab == false && n != -1 && nombre.length() <= 10){
+  filas = n*2+1;
+  columnas = n*2+1;
+  unidad = 900/filas;
+  generarLab = true;
+  generarLaberinto(filas, columnas, 1, 1);
+}
+
+if(op == 1 && (mouseX >= 1150 && mouseX <= 1550) && (mouseY >= 800 && mouseY <= 850)){
+  generarLab = false;
+}
+
+if(op == 2 && (mouseX >= 1468 && mouseX <= 1583) && (mouseY >= 16 && mouseY <= 131)){
+  generarLab = false;
+}
+
   if ( count < 2 ) {
     if ( selectedRow % 2 != 0 || selectedColumn % 2 != 0 ) {
       if ( (selectedRow == 0) || (selectedRow == 2*n) || (selectedColumn == 0) || (selectedColumn == 2*n) ) {
@@ -111,8 +129,8 @@ void mouseClicked() {
   if ( count == 2 ) {
     directionPriority(entryRow, exitRow, entryCol, exitCol);
     solveMaze(entryRow, exitRow, entryCol, exitCol);
-  }
-}
+  }}
+
 //void seleccionEntradaSalida() {
 //  mouseEnX = mouseX/unidad;
 //  mouseEnY = mouseY/unidad;
@@ -126,17 +144,16 @@ void mouseClicked() {
 //}
 
 void setup() {
-  size(1000, 1000);
+  size(1600, 900);
   background(255);
-  generarLaberinto(filas, columnas, 1, 1);
-  imprimirMatriz(M, filas, columnas, 0, 0);
+  
   cont = 0;
    
 
-}
 
-int iii= 0;
-void draw() {
+
+// int iii= 0;
+/*void draw() {
  dibujarlab();
   smoothDraw();
   dibujarBolita(posicX, posicY);
@@ -146,13 +163,105 @@ void draw() {
     
   }
 }
+*/
 
-void drawSteps() {
+/*void drawSteps() {
   M[explored[iii][0]][explored[iii][1]] = 2;
     //fill(255,0,255,90);
     //square(explored[iii][0]*unidad, explored[iii][1]*unidad,unidad);
     if( !(explored[iii][0] == exitRow && explored[iii][1] == exitCol) ){
       iii++;
     }
+}*/
     
+
+ 
+
+  cont = 0;
+  Font customFont = new Font("Arial Black", Font.BOLD, 30);
+  font = createFont("New Athletic M54.ttf", 100);
+  fondoPrin = loadImage("Fondo.jpg");
+  fondoCredits = loadImage("Creditos.jpg");
+  Reiniciar = loadImage("Reiniciar.png");
+  Bombilla = loadImage("Bombilla.png");
+  fondoNombre = loadImage("nombreDimension.jpg");
+  fondoTutorial1 = loadImage("Tutorial1.jpg");
+  fondoTutorial2 = loadImage("Tutorial2.jpg");
+  fondoTutorial3 = loadImage("Tutorial3.jpg");
+  fondoTutorial4 = loadImage("Tutorial4.jpg");
+  fondoTutorial5 = loadImage("Tutorial5.jpg");
+  buenaSuerte = loadImage("Buena suerte.jpg");
+  personaje = loadImage("Personaje.png");
+  // Create a text field name
+    textField = new GTextField(this, 475, 180, 620, 70);
+    textField.setPromptText("Ingrese su primer nombre");
+    textField.setFont(customFont);
+    textField.setOpaque(true);
+    textField.setVisible(false);
+  // Create a text field name
+    textField2 = new GTextField(this, 475, 700, 620, 70);
+    textField2.setPromptText("Ingrese la dimension de 1 a 48");
+    textField2.setFont(customFont);
+    textField2.setOpaque(true);
+    textField2.setVisible(false);
+    // Create a slider dimension
+    //sliderDimension = new GSlider(this, 475,700, 620, 70);
+}
+void draw() {
+  // Switch que depende de op y indica la ventana a imprimir
+  switch(op){
+    // Ventana inicio
+  case 1:
+    inicio();
+  break;
+  //Ventana jugar
+  case 2:
+    nombreDimension();
+    if(op == 1){
+    }else if(op ==  21 && n != -1 && nombre.length() <= 10){
+    }else{
+      if(nombre.length() > 10){
+     String s = "Nombre ingresado invalido, solo ingrese su primer nombre.";
+      fill(0);
+      text(s, 405, 270, 780, 280);
+      fill(#FF1A1A);
+      text(s, 400, 270, 780, 320);
+      }
+    op = 2;
+    
+    }
+    
+    
+  break;
+  //ventana creditos
+  case 3:
+    creditos();
+  break;
+  //salir 
+  case 4:
+     exit();
+  break;
+  // ventana del juego
+  case 21:
+  tutorial1();
+  break;
+  case 22:
+  tutorial2();
+  break;
+  case 23:
+  tutorial3();
+  break;
+  case 24:
+  tutorial4();
+  break;
+  case 25:
+  tutorial5();
+  break;  
+  case 26:
+  tutorial6();
+  break;
+  case 27:
+  juego();
+  break;
+  }
 }
