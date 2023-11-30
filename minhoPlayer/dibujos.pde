@@ -4,8 +4,6 @@ public int columnas;
 public int unidad = 1;
 int mouseEnX;
 int mouseEnY;
-int distX, distY, numberOfFrames;
-int viaje[][] = new int[2][2];
 int MM[][] = new int[100][100];
 PFont font, fuente;
 int op = 1;
@@ -18,7 +16,11 @@ void dibujarlab() { // subrutina para dibujar el laberinto
     for (int j = 0; j < columnas; j++) {
       //noStroke();
       if (M[i][j] == 2) {
+        fill(#E0B8F2);
+        square(j*unidad, i*unidad, unidad);
+        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
         fill(255, 0, 255, 90);
+        square(j*unidad, i*unidad, unidad);
         square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
       } else if (M[i][j] == 0) { // dibuja las paredes
         fill(#612F77);
@@ -47,7 +49,11 @@ void smoothDraw() {
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
       if (M[i][j] == 2) {
+        fill(#E0B8F2);
+        square(j*unidad, i*unidad, unidad);
+        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
         fill(255, 0, 255, 90);
+        square(j*unidad, i*unidad, unidad);
         square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
       } else if (MM[i][j] == 0) { // dibuja las paredes
         fill(#612F77);
@@ -96,71 +102,17 @@ void drawSelection() {
 
 void drawSteps() {
   M[explored[iii][0]][explored[iii][1]] = 2;
-  //fill(255,0,255,90);
-  //square(explored[iii][0]*unidad, explored[iii][1]*unidad,unidad);
-  if ( !(explored[iii][0] == exitRow && explored[iii][1] == exitCol) ) {
+  if ( !(explored[iii][0] == exitRow && explored[iii][1] == exitCol) && frameCount % 1 == 0 ) {
     iii++;
   }
 }
 
-void mouseClicked() {
-  int selectedRow = mouseY / unidad ;
-  int selectedColumn = mouseX / unidad;
 
-  if (op == 21 && (mouseX >= 580 && mouseX <= 980) && (mouseY >= 800 && mouseY <= 850) && generarLab == false && n != -1 && nombre.length() <= 10) {
-    filas = n*2+1;
-    columnas = n*2+1;
-    unidad = 900/filas;
-    generarLab = true;
-    generarLaberinto(filas, columnas, 1, 1);
-  }
-
-  if (op == 1 && (mouseX >= 1150 && mouseX <= 1550) && (mouseY >= 800 && mouseY <= 850)) {
-    generarLab = false;
-  }
-
-  if (op == 2 && (mouseX >= 1468 && mouseX <= 1583) && (mouseY >= 16 && mouseY <= 131)) {
-    generarLab = false;
-  }
-
-  if ( count < 2 && op == 27 ) {
-    if ( selectedRow % 2 != 0 || selectedColumn % 2 != 0 ) {
-      if ( (selectedRow == 0 && selectedColumn <= 2*n) || (selectedRow == 2*n && selectedColumn <= 2*n) || (selectedColumn == 0 && selectedRow <= 2*n) || (selectedColumn == 2*n && selectedRow <= 2*n) ) {
-        if ( count == 0 ) {
-          entryRow = selectedRow;
-          entryCol = selectedColumn;
-          println(entryRow+" "+entryCol);
-        } else {
-          exitRow = selectedRow;
-          exitCol = selectedColumn;
-          println(exitRow+" "+exitCol);
-        }
-        M[selectedRow][selectedColumn] = 1;
-        count++;
-      }
-    }
-  }
-  if ( count == 2 ) {
-    directionPriority(entryRow, exitRow, entryCol, exitCol);
-    solveMaze(entryRow, exitRow, entryCol, exitCol);
-  }
-}
-
-//void seleccionEntradaSalida() {
-//  mouseEnX = mouseX/unidad;
-//  mouseEnY = mouseY/unidad;
-//  if (cont != 2) {
-//    if ((mouseEnX == 0 && mouseEnY < filas) || (mouseEnY == 0 && mouseEnX < columnas) || (mouseEnX == columnas -1 && mouseEnY < filas) || (mouseEnY == filas -1 && mouseEnX < columnas)) {
-//      noStroke();
-//      fill(#E0B8F2, 170);
-//      square(mouseEnX*unidad + unidad/4, mouseEnY*unidad + unidad/4, unidad);
-//    }
-//  }
-//}
 
 void setup() {
   size(1600, 900);
   background(255);
+  windowTitle("MIROH");
   count = 0;
   Font customFont = new Font("Arial Black", Font.BOLD, 30);
   font = createFont("New Athletic M54.ttf", 100);
@@ -176,6 +128,8 @@ void setup() {
   fondoTutorial5 = loadImage("Tutorial5.jpg");
   buenaSuerte = loadImage("Buena suerte.jpg");
   personaje = loadImage("Personaje.png");
+  personaje2 = loadImage("Personaje2.png");
+  initImagen();
   // Create a text field name
   textField = new GTextField(this, 475, 180, 620, 70);
   textField.setPromptText("Ingrese su primer nombre");
@@ -188,8 +142,6 @@ void setup() {
   textField2.setFont(customFont);
   textField2.setOpaque(true);
   textField2.setVisible(false);
-  // Create a slider dimension
-  //sliderDimension = new GSlider(this, 475,700, 620, 70);
 }
 void draw() {
   // Switch que depende de op y indica la ventana a imprimir
@@ -213,8 +165,6 @@ void draw() {
       }
       op = 2;
     }
-
-
     break;
     //ventana creditos
   case 3:
