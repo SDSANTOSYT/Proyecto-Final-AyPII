@@ -67,7 +67,7 @@ void avaliableDirection(int currentCellX, int currentCellY, int iteraction) { //
   if (iteraction < 4) {
     int childCellX = currentCellX;
     int childCellY = currentCellY;
-    switch (moveTo[iteraction]) {
+    switch (moveTo[3-iteraction]) {
     case 'W':
       childCellX = currentCellX - 1;
       break;
