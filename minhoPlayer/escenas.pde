@@ -1,4 +1,3 @@
-
 int x = 200, y = 300, w = 200, h = 50;
 // Escenas
 
@@ -17,25 +16,31 @@ void inicio() {
 
 //juego
 void juego() {
-
   dibujarlab();
-  smoothDraw();
+  //smoothDraw();
   drawSelection();
   if ( count == 1 ) {
     posicX = entryCol;
     posicY = entryRow;
-    //if (iii < filas*columnas) {
-    //  drawSteps();
-    //}
   } else if (count >= 2) {
     dibujarBolita(posicY, posicX);
   }
-  if (buscar){
+  if (buscar) {
     if (iii < filas*columnas) {
       drawSteps();
     }
   }
-
+  image(personaje2, 1200, 350, 500, 500);
+  String texto;
+  if (posicX == exitCol && posicY == exitRow) {
+    texto = "Bien hecho " + nombre ;
+  } else {
+     texto = "Tranquilo " + nombre + ", \n yo te espero";
+  }
+  fill(0);
+  text(texto, 855, 250, 800, 480);
+  fill(255);
+  text(texto, 850, 250, 800, 420);
   botons(1468, 16, 115, 115, 2, "", 5000);
   image(Reiniciar, 1460, 10);
   botons(1302, 16, 115, 115, 212, "", 5000);
@@ -116,28 +121,12 @@ void nombreDimension() {
   botons(1150, 800, 400, 50, 1, "Volver al inicio", 50);
 }
 
-
 void creditos() {
   size(1600, 900);
   image(fondoCredits, 0, 0);
   botons(1150, 800, 400, 50, 1, "Volver", 50);
 }
-//subrutina para agregar botones
-void botons(int x, int y, int w, int   h, int window, String texto, int r) {
-  if ((mouseX > x) && (mouseX < x + w) && (mouseY > y) && (mouseY < y + h)) {
-    fill(#A15CBF);
-    if (mousePressed == true) {
-      op = window;
-    }
-  } else {
-    fill(#612F77);
-  }
 
-  rect(x, y, w, h, r);
-  fill(255);
-  textSize(50);
-  text(texto, x + 200, y + 45);
-}
 
 //subrutina para caja de texto(texlField)
 void handleTextEvents(GTextField textField, GEvent event) {

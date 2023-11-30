@@ -1,17 +1,11 @@
-//librerias para cajas de texto
-import g4p_controls.*;
-import java.awt.Font;
-PImage fondoPrin, fondoCredits, Reiniciar, Bombilla, fondoNombre, fondoTutorial1, personaje, fondoTutorial2, fondoTutorial3, fondoTutorial4, fondoTutorial5, buenaSuerte;
+
 static int M[][] = new int[100][100]; // Matriz donde se van generando los caminos
 static int Z[][] = new int[100][100];
 static int inicio[][] = new int[10000][2]; // inicio de los caminos
 static int fin[][] = new int[10000][2]; // fin de los caminos
 static int k = 0, l = 0, i, j, direccion;
-GTextField textField, textField2;
-GSlider sliderDimension;
-float m;
-String nombre = "Player";
-boolean generarLab =  false;
+
+
 /**
  * función que me dice si una casilla ya ha sido visitada
  * @param casilla
@@ -160,19 +154,6 @@ void generarLaberinto(int filas, int columnas, int y, int x) {
     x = j;
     if (x != 1 & y != 1) {
       generarLaberinto(filas, columnas, y, x);
-    }
-  }
-}
-
-void imprimirMatriz(int vector[][], int n, int m, int i, int j) {
-  if (i < n) {
-    if (j < m) {
-      System.out.printf("%d,", vector[i][j]);
-      imprimirMatriz(vector, n, m, i, j + 1);
-    } else {
-      System.out.println();
-      j = 0;
-      imprimirMatriz(vector, n, m, i + 1, j);
     }
   }
 }
