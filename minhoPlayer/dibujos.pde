@@ -10,11 +10,11 @@ int op = 1;
 int iii= 0;
 boolean buscar = false;
 
-void dibujarlab() { // subrutina para dibujar el laberinto
+// subrutina para dibujar el laberinto junto con los muros, los pasillos y el camino que lo resuelve
+void dibujarlab() {
   background(#D499EF);
   for (int i = 0; i < filas; i++) {
     for (int j = 0; j < columnas; j++) {
-      //noStroke();
       if (M[i][j] == 2) {
         fill(#E0B8F2);
         square(j*unidad, i*unidad, unidad);
@@ -42,50 +42,9 @@ void dibujarlab() { // subrutina para dibujar el laberinto
   drawSelection();
 }
 
-public int randomColumna= 1;
-public int randomFila= 1;
 
-void smoothDraw() {
-  for (int i = 0; i < filas; i++) {
-    for (int j = 0; j < columnas; j++) {
-      if (M[i][j] == 2) {
-        fill(#E0B8F2);
-        square(j*unidad, i*unidad, unidad);
-        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
-        fill(255, 0, 255, 90);
-        square(j*unidad, i*unidad, unidad);
-        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
-      } else if (MM[i][j] == 0) { // dibuja las paredes
-        fill(#612F77);
-        if ((j == 0 || i == 0 || j == columnas -1 || i == filas -1)) { // si está en el borde solo dibuja un cuadrado
-          square(j*unidad + unidad/2, i*unidad, unidad);
-        } else if (i%2 == 0) { // dibuja una pared horizontal
-          rect(j*unidad + unidad/2, i*unidad + unidad/2, unidad, unidad/2);
-        } else { // dibuja una pared vertical
-          rect(j*unidad + unidad/2, i*unidad, unidad/2, unidad + unidad/2);
-        }
-      } else if (M[i][j] == 1) {
-        noStroke();
-        fill(#E0B8F2);
-        square(j*unidad, i*unidad, unidad);
-        square(j*unidad + unidad/4, i*unidad + unidad/4, unidad);
-      }
-    }
-  }
 
-  if ( frameCount % 0.5 == 0 ) {
-    if ( randomFila < filas ) {
-      MM[randomFila][randomColumna] = 1;
-      if ( randomColumna == columnas - 1 ) {
-        randomFila++;
-        randomColumna= 0;
-      } else {
-        randomColumna++;
-      }
-    }
-  }
-}
-
+// Subrutina que dibuja el recuadro de selección en el laberinto
 void drawSelection() {
   int mouseAtRow = mouseX / unidad ;
   int mouseAtColumn = mouseY / unidad;
@@ -100,6 +59,8 @@ void drawSelection() {
   }
 }
 
+
+// Subrutina que dibuja el camino que resuelve el laberinto
 void drawSteps() {
   M[explored[iii][0]][explored[iii][1]] = 2;
   if ( !(explored[iii][0] == exitRow && explored[iii][1] == exitCol) && frameCount % 1 == 0 ) {
@@ -114,8 +75,11 @@ void setup() {
   background(255);
   windowTitle("MIROH");
   count = 0;
+  // importación de fuentes personalizadas
   Font customFont = new Font("Arial Black", Font.BOLD, 30);
   font = createFont("New Athletic M54.ttf", 100);
+
+  // Creación de imagenes a utilizar
   fondoPrin = loadImage("Fondo.jpg");
   fondoCredits = loadImage("Creditos.jpg");
   Reiniciar = loadImage("Reiniciar.png");
@@ -150,7 +114,7 @@ void draw() {
   case 1:
     inicio();
     break;
-    //Ventana jugar
+    //Ventana entradas de usuario
   case 2:
     nombreDimension();
     if (op == 1) {
@@ -174,34 +138,41 @@ void draw() {
   case 4:
     exit();
     break;
-    // ventana del juego
+    // ventana del tutorial 1
   case 21:
     tutorial1();
     break;
+    // ventana del tutorial 2
   case 22:
     tutorial2();
     break;
+    // ventana del tutorial 3
   case 23:
     tutorial3();
     break;
+    // ventana del tutorial 4
   case 24:
     tutorial4();
     break;
+    // ventana del tutorial 5
   case 25:
     tutorial5();
     break;
+    // ventana del tutorial 6
   case 26:
     tutorial6();
     break;
+    // ventana del juego
   case 27:
     juego();
+    // si se oprime el botón de reiniciar
     if (op == 2) {
       reiniciarMatrizLab();
       reiniciarSeleccion();
-      reiniciarDibujoMatriz();
       reiniciarBusqueda();
       buscar = false;
       iii = 0;
+      // si se oprime el botón de buscar
     } else if (op == 212) {
       if (count >= 2) {
         buscar = true;

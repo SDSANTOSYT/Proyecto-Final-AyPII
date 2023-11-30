@@ -1,7 +1,7 @@
 int x = 200, y = 300, w = 200, h = 50;
 // Escenas
 
-//inicio
+//Subrutina que dibuja la ventana de inicio
 void inicio() {
   size(1600, 900);
   image(fondoPrin, 0, 0);
@@ -14,10 +14,9 @@ void inicio() {
   botons(550, 600, 400, 50, 4, "Exit", 50);
 }
 
-//juego
+//Subrutina que dibuja la ventana del juego
 void juego() {
   dibujarlab();
-  //smoothDraw();
   drawSelection();
   if ( count == 1 ) {
     posicX = entryCol;
@@ -30,17 +29,19 @@ void juego() {
       drawSteps();
     }
   }
+  // texto que dice el personaje
   image(personaje2, 1200, 350, 500, 500);
   String texto;
   if (posicX == exitCol && posicY == exitRow) {
     texto = "Bien hecho " + nombre ;
   } else {
-     texto = "Tranquilo " + nombre + ", \n yo te espero";
+    texto = "Tranquilo " + nombre + ", \n yo te espero";
   }
   fill(0);
   text(texto, 855, 250, 800, 480);
   fill(255);
   text(texto, 850, 250, 800, 420);
+  // botones
   botons(1468, 16, 115, 115, 2, "", 5000);
   image(Reiniciar, 1460, 10);
   botons(1302, 16, 115, 115, 212, "", 5000);
@@ -48,7 +49,7 @@ void juego() {
   textField.setVisible(false);
   textField2.setVisible(false);
 }
-//  tutorial 1
+//  subrutina que dibuja la ventana tutorial 1
 void tutorial1() {
   size(1600, 900);
   image(fondoTutorial1, 0, 0);
@@ -63,7 +64,7 @@ void tutorial1() {
   fill(#D91EFF);
   text(texto, 550, 670, 780, 320);
 }
-
+//  subrutina que dibuja la ventana tutorial 2
 void tutorial2() {
   size(1600, 900);
   image(fondoTutorial2, 0, 0);
@@ -73,6 +74,7 @@ void tutorial2() {
   botons(100, 20, 400, 50, 27, "Saltar tutorial", 50);
 }
 
+//  subrutina que dibuja la ventana tutorial 3
 void tutorial3() {
   size(1600, 900);
   image(fondoTutorial3, 0, 0);
@@ -82,6 +84,7 @@ void tutorial3() {
   botons(100, 20, 400, 50, 27, "Saltar tutorial", 50);
 }
 
+//  subrutina que dibuja la ventana tutorial 4
 void tutorial4() {
   size(1600, 900);
   image(fondoTutorial4, 0, 0);
@@ -91,6 +94,7 @@ void tutorial4() {
   botons(100, 20, 400, 50, 27, "Saltar tutorial", 50);
 }
 
+//  subrutina que dibuja la ventana tutorial 5
 void tutorial5() {
   size(1600, 900);
   image(fondoTutorial5, 0, 0);
@@ -99,6 +103,8 @@ void tutorial5() {
   botons(1150, 800, 400, 50, 26, "Continuar", 50);
   botons(100, 20, 400, 50, 27, "Saltar tutorial", 50);
 }
+
+//  subrutina que dibuja la ventana tutorial 6
 void tutorial6() {
   size(1600, 900);
   image(buenaSuerte, 0, 0);
@@ -107,6 +113,7 @@ void tutorial6() {
   botons(580, 800, 400, 50, 27, "Continuar", 50);
 }
 
+//  subrutina que dibuja la ventana de las entradas del usuario
 void nombreDimension() {
   size(1600, 900);
   image(fondoNombre, 0, 0);
@@ -114,24 +121,14 @@ void nombreDimension() {
   textField2.setVisible(true);
   textField2.setNumeric(1, 48, -1);
   n = textField2.getValueI();
-  println(n);
   nombre = textField .getText();
-  println(nombre);
   botons(580, 800, 400, 50, 21, "Continuar", 50);
   botons(1150, 800, 400, 50, 1, "Volver al inicio", 50);
 }
 
+// subrutina que dibuja la ventana de creditos
 void creditos() {
   size(1600, 900);
   image(fondoCredits, 0, 0);
   botons(1150, 800, 400, 50, 1, "Volver", 50);
-}
-
-
-//subrutina para caja de texto(texlField)
-void handleTextEvents(GTextField textField, GEvent event) {
-  if (event == GEvent.ENTERED) {
-    String nombre = textField.getText();
-    println("Usuario: " + nombre);
-  }
 }

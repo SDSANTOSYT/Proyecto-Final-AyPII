@@ -88,7 +88,6 @@ void avaliableDirection(int currentCellX, int currentCellY, int iteraction) { //
       }
       stackAtFrontier(childCellY, childCellX);
       stackAtExplored(childCellY, childCellX);
-
     } else {
       avaliableDirection(currentCellX, currentCellY, iteraction+1);
     }

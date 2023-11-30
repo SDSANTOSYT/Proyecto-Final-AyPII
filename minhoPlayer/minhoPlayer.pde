@@ -3,7 +3,7 @@ public int posicX, posicY;
 
 PImage sprite[] = new PImage[4];
 public int minho;
-void initImagen(){
+void initImagen() {
   sprite[0] = loadImage("sprite_00.png");
   sprite[1] = loadImage("sprite_10.png");
   sprite[2] = loadImage("sprite_16.png");
